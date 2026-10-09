@@ -15,6 +15,57 @@ This project demonstrates a pattern for making JSON APIs more self-documenting b
 - **Reusable helper**: Generic pattern works across any resource
 - **Generators**: Scaffold new resources or retrofit existing ones with the pattern
 
+## Setup
+
+### 1. Add the generators to your Rails app
+
+Copy the `lib/generators/rest_actions/` directory from this repo into your Rails app:
+
+```bash
+cp -r lib/generators/rest_actions your-rails-app/lib/generators/
+```
+
+### 2. Add the helper method
+
+Add this to your `app/helpers/application_helper.rb`:
+
+```ruby
+def resource_actions(resource, context: nil)
+  case context
+  when :show
+    show_actions(resource)
+  when :index
+    index_actions(resource)
+  else
+    []
+  end
+end
+
+private
+
+def show_actions(resource)
+  resource_name = resource.class.name.underscore
+  [
+    { name: "edit", url: send("edit_#{resource_name}_path", resource), method: "GET" },
+    { name: "update", url: send("#{resource_name}_path", resource), method: "PATCH" },
+    { name: "destroy", url: send("#{resource_name}_path", resource), method: "DELETE" },
+    { name: "list", url: send("#{resource_name.pluralize}_path"), method: "GET" }
+  ]
+end
+
+def index_actions(resource)
+  resource_name = resource.class.name.underscore.pluralize
+  [
+    { name: "create", url: send("#{resource_name}_path"), method: "POST" },
+    { name: "new", url: send("new_#{resource_name.singularize}_path"), method: "GET" }
+  ]
+end
+```
+
+### 3. Use the generators
+
+You're ready to scaffold new resources with JSON actions built in!
+
 ## Generators
 
 ### Create a new resource with JSON actions
