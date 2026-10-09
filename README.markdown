@@ -59,6 +59,22 @@ This adds the JSON templates to one or more existing resources:
 - Creates `_resource.json.jbuilder` partial
 - Skips existing templates (won't overwrite)
 
+### Use with standard Rails generators
+
+You can also use the standard Rails controller generator and add JSON actions afterward:
+
+```bash
+# Generate a controller with views
+rails generate controller Products index show new
+
+# Add JSON templates with actions
+rails generate rest_actions:install_json Products
+
+# Add the resource route manually
+# In config/routes.rb:
+# resources :products
+```
+
 ## Example Responses
 
 ### Index (`GET /items.json`)
