@@ -13,6 +13,33 @@ This project demonstrates a pattern for making JSON APIs more self-documenting b
 - **Explicit HTTP methods**: Each action includes the HTTP verb needed
 - **Relative paths**: All URLs use relative paths for portability
 - **Reusable helper**: Generic pattern works across any resource
+- **Generators**: Scaffold new resources or retrofit existing ones with the pattern
+
+## Generators
+
+### Create a new resource with JSON actions
+
+```bash
+rails generate rest_actions:scaffold Post title:string body:text
+```
+
+This creates:
+- Model, controller, and all standard Rails views
+- JSON templates (`index.json.jbuilder`, `show.json.jbuilder`) with actions built in
+- Routes
+- Tests
+
+### Add JSON actions to existing resources
+
+```bash
+rails generate rest_actions:install_json Post Comment User
+```
+
+This adds the JSON templates to one or more existing resources:
+- Creates `index.json.jbuilder` with collection actions
+- Creates `show.json.jbuilder` with resource actions
+- Creates `_resource.json.jbuilder` partial
+- Skips existing templates (won't overwrite)
 
 ## Example Responses
 
