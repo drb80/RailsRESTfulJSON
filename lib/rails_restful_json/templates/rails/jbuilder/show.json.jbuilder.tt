@@ -1,0 +1,4 @@
+json.<%= singular_table_name %> do
+  json.partial! "<%= partial_path_name %>", <%= singular_table_name %>: @<%= singular_table_name %>
+end
+json.actions resource_actions(@<%= singular_table_name %>, context: :show)

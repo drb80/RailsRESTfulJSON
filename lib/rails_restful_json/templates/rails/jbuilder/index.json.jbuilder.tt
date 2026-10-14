@@ -1,0 +1,7 @@
+json.<%= plural_table_name %> do
+  json.array! @<%= plural_table_name %> do |<%= singular_table_name %>|
+    json.partial! "<%= partial_path_name %>", <%= singular_table_name %>: <%= singular_table_name %>
+    json.actions resource_actions(<%= singular_table_name %>, context: :index_item)
+  end
+end
+json.actions resource_actions(<%= class_name %>.new, context: :index)
