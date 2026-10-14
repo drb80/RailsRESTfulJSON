@@ -21,13 +21,21 @@ The JSON responses offer the same links as Rails' HTML scaffold views, so they'r
 
 ## Setup
 
-Add the gem to your app's `Gemfile`:
+Bundle add the gem:
+
+```ruby
+bundle add rails_restful_json --github="drb80/RailsRESTfulJSON"
+```
+
+Or add the gem to your app's `Gemfile`:
 
 ```ruby
 gem "rails_restful_json", github: "drb80/RailsRESTfulJSON"
 ```
 
 Then run `bundle install`. That's it! The `resource_actions` helper is available in all views, and `rails generate scaffold` creates JSON views with actions. To pick up later fixes, run `bundle update rails_restful_json`.
+
+
 
 ### Customizing the helper
 
